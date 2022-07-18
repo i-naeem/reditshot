@@ -1,4 +1,7 @@
 {
+  "name": "reditshot",
+  "description": "A gallery for reddit.",
+  "author": "En",
   "private": true,
   "scripts": {
     "dev": "next",
