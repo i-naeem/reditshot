@@ -1,11 +1,10 @@
-import { Box, Image, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import ImageCard from '../components/ImageCard';
 import getImages from '../lib/getImages';
 
 const Index = ({ images = [] }) => {
   const imgs = JSON.parse(images).map(img => (
-    <Box>
-      <Image src={img.path} alt={img.title} height='100%' width='100%' />
-    </Box>
+    <ImageCard key={img.id} image={img} />
   ));
 
   return (
@@ -18,7 +17,7 @@ const Index = ({ images = [] }) => {
 export default Index;
 
 export const getServerSideProps = async () => {
-  const images = await getImages('wallpapers', { limit: 15 });
+  const images = await getImages('wallpapers', { limit: 25 });
   return {
     props: {
       images: JSON.stringify(images),

@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         </Flex>
       </Box>
 
-      <Box px='2' as='main' minH='calc(100vh - 50px - 50px)'>
+      <Box as='main' minH='calc(100vh - 50px - 50px)'>
         <Component {...pageProps} />
       </Box>
 
