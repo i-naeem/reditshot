@@ -33,9 +33,7 @@ const ImageCard = props => {
               href={image.source}
               title={image.title}
             >
-              {image.title.length > 20
-                ? image.title.slice(0, 20).trim() + '...'
-                : image.title}
+              {image.excerptTitle}
             </Link>
 
             <br />

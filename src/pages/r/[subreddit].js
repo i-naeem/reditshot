@@ -1,8 +1,11 @@
 import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import ImageCard from '../../components/ImageCard';
 import getImages from '../../lib/getImages';
+import { useRouter } from 'next/router';
 
 export default function Subreddit({ images, after }) {
+  const router = useRouter();
+
   const imgs = JSON.parse(images).map(img => (
     <ImageCard key={img.id} image={img} />
   ));
@@ -10,7 +13,7 @@ export default function Subreddit({ images, after }) {
   return (
     <Box>
       <Box px='1' py='5'>
-        <Heading>r/wallpapers</Heading>
+        <Heading>{router.asPath}</Heading>
       </Box>
       <SimpleGrid columns={[1, 2, 3, 4]}>{imgs}</SimpleGrid>
 

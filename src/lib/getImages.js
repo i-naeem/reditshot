@@ -52,6 +52,10 @@ const getImages = async (
         return {
           id: image.media_id,
           title: post.data.title,
+          excerptTitle:
+            post.data.title.length > 15
+              ? post.data.title.slice(0, 15).trim() + '...'
+              : post.data.title,
           author: {
             uname: post.data.author,
             url: 'https://reddit.com/u/' + post.data.author,
@@ -69,6 +73,10 @@ const getImages = async (
         id: post.data.id,
         path: post.data.url,
         title: post.data.title,
+        excerptTitle:
+          post.data.title.length > 15
+            ? post.data.title.slice(0, 15).trim() + '...'
+            : post.data.title,
         author: {
           uname: post.data.author,
           url: 'https://reddit.com/u/' + post.data.author,
