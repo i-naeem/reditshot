@@ -23,11 +23,10 @@ import axios from 'axios';
  * @param {Object} Params
  * @returns {Promise<Image[]>}
  */
-const getImages = async (subreddit, { limit = 1, sort = 'new' } = {}) => {
-  if (!subreddit) {
-    throw new Error('Subreddit argument can not be undefined');
-  }
-
+const getImages = async (
+  subreddit = 'wallpapers',
+  { limit = 25, sort = 'new' } = {}
+) => {
   const url = new URL(`https://www.reddit.com/r/${subreddit}/new.json`);
   url.searchParams.set('limit', limit);
   url.searchParams.set('sort', sort);
@@ -44,15 +43,23 @@ const getImages = async (subreddit, { limit = 1, sort = 'new' } = {}) => {
 
   for (let post of posts) {
     if (post.data.is_gallery) {
-      const galleryImages = post.data.gallery_data.items.map(image => ({
-        id: image.media_id,
-        title: post.data.title,
-        author: post.data.author,
-        isAdult: post.data.over_18,
-        isSpoiler: post.data.spoiler,
-        path: `https://i.redd.it/${image.media_id}.jpg`,
-        source: `https://reddit.com` + post.data.permalink,
-      }));
+      const galleryImages = post.data.gallery_data.items.map(image => {
+        let type = post.data.media_metadata[image.media_id].m.split('/').at(-1);
+        let name = image.media_id + '.' + type;
+        let src = 'https://i.redd.it/' + name;
+        return {
+          id: image.media_id,
+          title: post.data.title,
+          author: {
+            uname: post.data.author,
+            url: 'https://reddit.com/u/' + post.data.author,
+          },
+          isAdult: post.data.over_18,
+          isSpoiler: post.data.spoiler,
+          path: src,
+          source: `https://reddit.com` + post.data.permalink,
+        };
+      });
 
       images.push(...galleryImages);
     } else if (!post.data.is_self && post.data.post_hint === 'image') {
@@ -60,7 +67,10 @@ const getImages = async (subreddit, { limit = 1, sort = 'new' } = {}) => {
         id: post.data.id,
         path: post.data.url,
         title: post.data.title,
-        author: post.data.author,
+        author: {
+          uname: post.data.author,
+          url: 'https://reddit.com/u/' + post.data.author,
+        },
         isAdult: post.data.over_18,
         isSpoiler: post.data.spoiler,
         source: `https://reddit.com` + post.data.permalink,

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Collapse,
-  Fade,
-  Image,
-  Link,
-  Slide,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Fade, Link, Text } from '@chakra-ui/react';
 import useHover from '../hooks/useHover';
 
 const ImageCard = props => {
@@ -45,8 +37,8 @@ const ImageCard = props => {
               </Link>
 
               <br />
-              <Link href={'https://reddit.com/u/' + image.author} fontSize='xs'>
-                @{image.author}
+              <Link href={image.author.url} fontSize='xs'>
+                @{image.author.uname}
               </Link>
             </Text>
           </Box>
