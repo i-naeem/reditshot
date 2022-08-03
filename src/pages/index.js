@@ -1,10 +1,9 @@
-import { Box } from '@chakra-ui/react';
-import Searchbar from '../components/Searchbar';
+import { Box, Text } from '@chakra-ui/react';
 
 const Index = props => {
   return (
     <Box>
-      <Searchbar />
+      <Text>Hello World</Text>
     </Box>
   );
 };

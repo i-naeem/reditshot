@@ -10,23 +10,26 @@ const Searchbar = props => {
     setSearchKeywords(event.target.value);
   };
 
-  const onSearch = props => {
+  const onSearch = event => {
+    event.preventDefault();
     if (searchKeywords) {
       router.push(`/r/${searchKeywords}`);
     }
   };
 
   return (
-    <Box {...props} p='2'>
+    <Box {...props} p='2' as='form' onSubmit={onSearch}>
       <InputGroup gap={1}>
         <Input
           type='Search...'
+          size='sm'
+          borderRadius='sm'
           onChange={onChange}
           value={searchKeywords}
           placeholder='Search for communities i.e wallpapers'
         />
 
-        <Button colorScheme='teal' onClick={onSearch}>
+        <Button size='sm' borderRadius='sm' colorScheme='teal' type='submit'>
           Search
         </Button>
       </InputGroup>

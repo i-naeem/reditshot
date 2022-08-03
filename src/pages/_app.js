@@ -1,27 +1,31 @@
-import {
-  Box,
-  ChakraProvider,
-  Container,
-  Flex,
-  Input,
-  Text,
-} from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Brand } from '../components/Brand';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
+import Searchbar from '../components/Searchbar';
 import theme from '../theme';
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME} - A reddit gallery.</title>
+        <title>Reditshot - A reddit gallery.</title>
       </Head>
 
       <Box px='2' as='header' boxShadow='base'>
         <Flex alignItems='center' justifyContent='space-between' minH='50px'>
           <Brand />
-          <DarkModeSwitch />
+
+          <Box
+            display='flex'
+            alignItems='center'
+            height='100%'
+            flexGrow='1'
+            maxW='600px'
+          >
+            <Searchbar flexGrow='1' />
+            <DarkModeSwitch />
+          </Box>
         </Flex>
       </Box>
 
