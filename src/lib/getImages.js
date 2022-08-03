@@ -25,10 +25,12 @@ import axios from 'axios';
  */
 const getImages = async (
   subreddit = 'wallpapers',
-  { limit = 25, sort = 'new' } = {}
+
+  { limit = 100, sort = 'new', after = null } = {}
 ) => {
   const url = new URL(`https://www.reddit.com/r/${subreddit}/new.json`);
   url.searchParams.set('limit', limit);
+  url.searchParams.set('after', after);
   url.searchParams.set('sort', sort);
 
   const endpoint = url.href;
@@ -78,7 +80,7 @@ const getImages = async (
     }
   }
 
-  return images;
+  return { images, after: response.data.data.after };
 };
 
 export default getImages;
