@@ -1,4 +1,4 @@
-import { Box, Button, Flex, SimpleGrid } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, SimpleGrid } from '@chakra-ui/react';
 import ImageCard from '../../components/ImageCard';
 import getImages from '../../lib/getImages';
 
@@ -9,6 +9,9 @@ export default function Subreddit({ images, after }) {
 
   return (
     <Box>
+      <Box px='1' py='5'>
+        <Heading>r/wallpapers</Heading>
+      </Box>
       <SimpleGrid columns={[1, 2, 3, 4]}>{imgs}</SimpleGrid>
 
       <Box p='1'>
