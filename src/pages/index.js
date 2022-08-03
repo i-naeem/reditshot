@@ -5,11 +5,9 @@ import {
   Input,
   Center,
   Button,
-  Heading,
   Container,
   ButtonGroup,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { Brand } from '../components/Brand';
 
 const Index = props => {
