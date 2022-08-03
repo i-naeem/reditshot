@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const Searchbar = props => {
   const router = useRouter();
-  const [searchKeywords, setSearchKeywords] = useState('');
+  const [searchKeywords, setSearchKeywords] = useState(router.query.q || '');
 
   const onChange = event => {
     setSearchKeywords(event.target.value);
@@ -13,7 +13,7 @@ const Searchbar = props => {
   const onSearch = event => {
     event.preventDefault();
     if (searchKeywords) {
-      router.push(`/r/${searchKeywords}`);
+      router.push(`/search?q=${searchKeywords}`);
     }
   };
 
@@ -21,8 +21,8 @@ const Searchbar = props => {
     <Box {...props} p='2' as='form' onSubmit={onSearch}>
       <InputGroup gap={1}>
         <Input
-          type='Search...'
           size='sm'
+          type='Search...'
           borderRadius='sm'
           onChange={onChange}
           value={searchKeywords}
