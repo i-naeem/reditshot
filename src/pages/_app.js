@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, Flex, Text } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, Link, Text } from '@chakra-ui/react';
 import Head from 'next/head';
 import { Brand } from '../components/Brand';
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
 
       <Box px='2' as='header' boxShadow='base'>
         <Flex alignItems='center' justifyContent='space-between' minH='50px'>
-          <Brand />
+          <Brand fontSize='2xl' />
 
           <Box
             display='flex'
@@ -33,9 +33,23 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Box>
 
-      <Box px='2' as='footer' minH='50px'>
+      <Box
+        px='2'
+        as='footer'
+        minH='50px'
+        display='flex'
+        alignItems='center'
+        justifyContent='center'
+      >
         <Text>
-          Developed by <strong>@en</strong>
+          Developed by{' '}
+          <Link
+            href='https://github.com/i-naeem'
+            target='_blank'
+            fontWeight='bold'
+          >
+            @en
+          </Link>
         </Text>
       </Box>
     </ChakraProvider>

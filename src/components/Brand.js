@@ -1,18 +1,18 @@
-import { Text } from '@chakra-ui/react';
+import { Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 
 export const Brand = props => {
   return (
     <Link href='/' passHref>
-      <Text
+      <Heading
         as='a'
         bgGradient='linear(to-l, #7928CA, #FF0080)'
         bgClip='text'
-        fontSize='2xl'
         fontWeight='bold'
+        {...props}
       >
         Reditshot
-      </Text>
+      </Heading>
     </Link>
   );
 };
