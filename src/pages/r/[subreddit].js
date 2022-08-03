@@ -1,10 +1,8 @@
-import { Box, Button, SimpleGrid } from '@chakra-ui/react';
+import { Box, Button, Flex, SimpleGrid } from '@chakra-ui/react';
 import ImageCard from '../../components/ImageCard';
-import { useRouter } from 'next/router';
 import getImages from '../../lib/getImages';
 
 export default function Subreddit({ images, after }) {
-  const router = useRouter();
   const imgs = JSON.parse(images).map(img => (
     <ImageCard key={img.id} image={img} />
   ));
@@ -13,9 +11,13 @@ export default function Subreddit({ images, after }) {
     <Box>
       <SimpleGrid columns={[1, 2, 3, 4]}>{imgs}</SimpleGrid>
 
-      <Button as='a' href={'?after=' + after}>
-        Next Page
-      </Button>
+      <Box p='1'>
+        <Flex justifyContent='flex-end'>
+          <Button as='a' href={'?after=' + after} colorScheme='blue'>
+            Next Page
+          </Button>
+        </Flex>
+      </Box>
     </Box>
   );
 }
@@ -23,7 +25,7 @@ export default function Subreddit({ images, after }) {
 export const getServerSideProps = async context => {
   try {
     const data = await getImages(context.query.subreddit, {
-      limit: 25,
+      limit: 50,
       after: context.query.after,
     });
     return {
